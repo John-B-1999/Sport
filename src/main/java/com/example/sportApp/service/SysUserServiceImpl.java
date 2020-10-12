@@ -1,7 +1,8 @@
 package com.example.sportApp.service;
 
 import com.example.sportApp.dao.SysUserMapper;
-import com.example.sportApp.model.SysUser;
+import com.example.sportApp.model.User;
+import com.example.sportApp.utils.copyUtils.FileUtils;
 import com.example.sportApp.utils.page.PageRequest;
 import com.example.sportApp.utils.page.PageResult;
 import com.example.sportApp.utils.page.PageUtils;
@@ -22,17 +23,17 @@ public class SysUserServiceImpl implements SysUserService {
     private SysUserMapper sysUserMapper;
 
     @Override
-    public SysUser findByUserId(Long userId) {
+    public User findByUserId(Long userId) {
         return sysUserMapper.selectByPrimaryKey(userId);
     }
 
     @Override
-    public List<SysUser> findAll() {
+    public List<User> findAll() {
         return sysUserMapper.selectAll();
     }
 
     @Override
-    public PageResult findPage(PageRequest pageRequest) {
+    public PageResult findPage(PageRequest pageRequest) throws Exception {
         return PageUtils.getPageResult(pageRequest, getPageInfo(pageRequest));
     }
 
@@ -41,11 +42,12 @@ public class SysUserServiceImpl implements SysUserService {
      * @param pageRequest
      * @return
      */
-    private PageInfo<SysUser> getPageInfo(PageRequest pageRequest) {
+    private PageInfo<User> getPageInfo(PageRequest pageRequest) throws Exception {
         int pageNum = pageRequest.getPageNum();
         int pageSize = pageRequest.getPageSize();
         PageHelper.startPage(pageNum, pageSize);
-        List<SysUser> sysMenus = sysUserMapper.selectPage();
+        List<User> sysMenus = sysUserMapper.selectPage();
+        FileUtils.generateImage(sysMenus.get(0).getPic(),"C:\\Users\\ywm\\Desktop\\img.jpg");
         return new PageInfo<>(sysMenus);
     }
 }

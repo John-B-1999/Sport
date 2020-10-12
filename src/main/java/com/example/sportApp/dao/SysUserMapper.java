@@ -1,6 +1,6 @@
 package com.example.sportApp.dao;
 
-import com.example.sportApp.model.SysUser;
+import com.example.sportApp.model.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -28,16 +28,16 @@ public interface SysUserMapper {
      * 查询全部用户
      * @return
      */
-    List<SysUser> selectAll();
+    List<User> selectAll();
 
     /**
      * 分页查询用户
      * @return
      */
-    List<SysUser> selectPage();
+    List<User> selectPage();
 
     /**
      * 根据id查询
      */
-     SysUser selectByPrimaryKey(Long userId);
+     User selectByPrimaryKey(Long userId);
 }

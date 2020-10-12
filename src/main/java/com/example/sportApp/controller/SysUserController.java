@@ -26,7 +26,7 @@ public class SysUserController {
     }
 
     @PostMapping(value="/findPage")
-    public Object findPage(@RequestBody PageRequest pageQuery) {
+    public Object findPage(@RequestBody PageRequest pageQuery) throws Exception {
         return sysUserService.findPage(pageQuery);
     }
 }

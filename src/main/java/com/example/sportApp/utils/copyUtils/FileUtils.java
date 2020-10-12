@@ -591,9 +591,9 @@ public class FileUtils {
         return result;
     }
 
-    public static void main(String[] args) {
-//        readExcel("/Users/mac/Documents/1.xls");
-        String[] title = {"序号", "姓名", "年龄"};
-//        writeExcel(title);
+    public static void main(String[] args) throws Exception {
+        String s = getImageToBase64("http://n.sinaimg.cn/news/crawl/64/w550h314/20200928/ead2-izrvxmh6255042.jpg");
+        System.out.println(s);
+        generateImage(s,"C:\\Users\\ywm\\Desktop\\img.jpg");
     }
 }

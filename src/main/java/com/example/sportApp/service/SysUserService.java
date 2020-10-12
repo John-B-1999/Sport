@@ -1,6 +1,6 @@
 package com.example.sportApp.service;
 
-import com.example.sportApp.model.SysUser;
+import com.example.sportApp.model.User;
 import com.example.sportApp.utils.page.PageRequest;
 import com.example.sportApp.utils.page.PageResult;
 
@@ -16,13 +16,13 @@ public interface SysUserService {
      * @param userId
      * @return
      */
-    SysUser findByUserId(Long userId);
+    User findByUserId(Long userId);
 
     /**
      * 查找所有用户
      * @return
      */
-    List<SysUser> findAll();
+    List<User> findAll();
 
     /**
      * 分页查询接口
@@ -32,5 +32,5 @@ public interface SysUserService {
      * @param pageRequest 自定义，统一分页查询请求
      * @return PageResult 自定义，统一分页查询结果
      */
-    PageResult findPage(PageRequest pageRequest);
+    PageResult findPage(PageRequest pageRequest) throws Exception;
 }

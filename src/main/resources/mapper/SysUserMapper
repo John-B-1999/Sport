@@ -12,7 +12,10 @@
 
     <select id="selectPage"  resultType="User">
         select
-            *
+            id,
+            user_name as userName,
+            password,
+            pic
         from user
     </select>
 

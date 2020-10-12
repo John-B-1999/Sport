@@ -1,16 +1,13 @@
 package com.example.sportApp.model;
 
-import io.swagger.annotations.ApiModel;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 /**
  *  user
- * @author 大狼狗 2020-10-10
+ * @author 大狼狗 2020-10-12
  */
-@ApiModel(value = "User",description = "用户对象")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -29,6 +26,11 @@ public class User implements Serializable {
      * 用户密码(加密)
      */
     private String password;
+
+    /**
+     * 图片（base64）
+     */
+    private String pic;
 
 
     public User() {
@@ -58,5 +60,12 @@ public class User implements Serializable {
         this.password = password;
     }
 
-}
+    public String getPic() {
+        return pic;
+    }
 
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
+
+}

@@ -18,7 +18,6 @@ class DemoApplicationTests {
     private RedisTemplate redisTemplate;
 
     private String  cityGeoKey = "city";
-
     @Test
     void testZset() {
         String s = redisTemplate.opsForZSet().range("myset",0,10).toString();
