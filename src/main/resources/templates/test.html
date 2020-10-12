@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Vue单文件例子</title>
+    <script type="text/javascript" src="../static/js/vue.js" charset="utf-8"></script>
+    <style>
+        table, tr, td, th {
+            border: 1px solid black;
+        }
+
+        .v-enter-active {
+            transition: all 1s;
+        }
+
+        .v-leave-active {
+            transition: all 1s;
+        }
+
+        .v-enter, .v-leave-to {
+            opacity: 0;
+        }
+    </style>
+    <link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.min.css" rel="stylesheet">
+</head>
+<body>
+<h1>Vue实例</h1>
+<div id="s1">
+    <p>{{data}}</p>
+</div>
+<script>
+    let vm1 = new Vue({
+        el: '#s1',
+        data: {
+            data: '一些数据'
+        }
+    })
+</script>
+
+<h1>模板语法</h1>
+<div id="s2">
+    <button v-on:click='changeText'>修改文本</button>
+    <p>文本：{{text}}</p>
+    <p>组合表达式：{{text + new Date()}}</p>
+    <p v-once>只渲染一次的文本:{{text}}</p>
+    <p>HTML代码：<span v-html="html"></span></p>
+    <p>特性:
+        <button v-bind:disabled="disabled">禁用按钮</button>
+    </p>
+</div>
+<script>
+    let vm2 = new Vue({
+        el: '#s2',
+        data: {
+            text: 1,
+            html: '<del>666</del>',
+            disabled: true
+        },
+        methods: {
+            changeText: function (event) {
+                this.text += 1
+            }
+        }
+    })
+</script>
+
+<h1>计算属性</h1>
+<div id="s3">
+    <button @click="changeWords">修改单词</button>
+    <p>单词：{{words}}</p>
+    <p>单词大写：{{toUpper}}</p>
+</div>
+<script>
+    let vm3 = new Vue({
+        el: '#s3',
+        data: {
+            words: 'I love you'
+        },
+        computed: {
+            toUpper: function () {
+                return this.words.toUpperCase()
+            }
+        },
+        methods: {
+            changeWords: function (event) {
+                this.words = 'You love me'
+            }
+        }
+    })
+</script>
+
+<h1>条件渲染</h1>
+
+
+<div id="s4">
+    <h3>v-if渲染会实际创建和销毁对象</h3>
+    <p>分数是:<input type="text" v-model="mark"/></p>
+    <p v-if="mark < 60">不及格</p>
+    <p v-else-if="mark <80">及格</p>
+    <p v-else="">优秀</p>
+    <h3>v-show仅仅调用CSS display属性</h3>
+    <button @click="toggleShow">改变show状态</button>
+    <p v-show="show">可以看到我</p>
+</div>
+<script>
+    let vm4 = new Vue({
+        el: '#s4',
+        data: {
+            mark: 80,
+            show: true
+        },
+        methods: {
+            toggleShow: function () {
+                this.show = !this.show
+            }
+        }
+    })
+</script>
+
+<h1>列表渲染</h1>
+<div id="s5">
+    <h3>名字列表</h3>
+    <ul>
+        <li v-for="name in names">{{name}}</li>
+    </ul>
+
+    <h3>人物表格</h3>
+    <table>
+        <thead>
+        <tr>
+            <td>编号</td>
+            <td>姓名</td>
+            <td>年龄</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(person, index) of people" :key="index">
+            <td>{{index}}</td>
+            <td>{{person.name}}</td>
+            <td>{{person.age}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<script>
+    let vm5 = new Vue({
+        el: '#s5',
+        data: {
+            names: [
+                'zhang3',
+                'li4',
+                'yitian',
+                'jojo'
+            ],
+            people: [
+                {name: 'zhang3', age: 24},
+                {name: 'li4', age: 25},
+                {name: 'yitian', age: 24},
+                {name: 'jojo', age: 30}
+            ]
+        }
+    })
+</script>
+
+<h1>事件处理</h1>
+<div id="s6">
+    <h3>计数器</h3>
+    <p>
+        <button @click="addCount">增加计数</button>
+        <em>{{count}}</em>
+    </p>
+    <h3>获取按键(单击、回车和空格)</h3>
+    <input type="text"
+           @keyup.enter="alert('按下了回车')"
+           @keyup.space="alert('按下了空格')"
+           @click="alert('单击')"/>
+</div>
+<script>
+    let vm6 = new Vue({
+        el: '#s6',
+        data: {
+            count: 0
+        },
+        methods: {
+            addCount: function () {
+                this.count++
+            }
+        }
+    })
+</script>
+
+<h1>绑定表单</h1>
+<div id="s7">
+    <p>文本框：{{text}}</p>
+    <p>多行文本：{{textArea}}</p>
+    <p>单选按钮：{{radio}}</p>
+    <p>复选框：{{checkbox}}</p>
+    <p>多选框：{{select}}</p>
+    <hr>
+    <p>文本框：<input type="text" v-model="text"></p>
+    <p>多行文本：<textarea v-model="textArea"></textarea></p>
+    <p>单选按钮：<input type="radio" v-model="radio" value="1" id="one"><label for="one">1</label>
+        <input type="radio" value="2" v-model="radio" id="two"><label for="two">2</label>
+    </p>
+    <p>复选框：<input type="checkbox" v-model="checkbox" id="checkbox"><label for="checkbox">复选框</label></p>
+    <p>多选框：<select id="select" v-model="select">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+    </select>
+    </p>
+</div>
+<script>
+    let vm7 = new Vue({
+        el: '#s7',
+        data: {
+            text: 'text',
+            textArea: 'textArea',
+            radio: '',
+            checkbox: '',
+            select: '',
+        }
+    })
+</script>
+
+<h1>组件</h1>
+<div id="s8">
+    <h3>hello world组件</h3>
+    <hello-world></hello-world>
+    <h3>从父组件传递数据</h3>
+    <hello-world name="zhang3"></hello-world>
+    <h3>动态传递数据</h3>
+    <hello-world :name="name"></hello-world>
+</div>
+<script>
+    let component1 = {
+        template: '<p>{{hello}} {{name}}</p>',
+        data() {
+            return {
+                hello: 'hello world'
+            }
+        },
+        props: [
+            'name'
+        ]
+    }
+    let vm8 = new Vue({
+        el: '#s8',
+        data: {
+            name: 'yitian'
+        },
+        components: {
+            'hello-world': component1,
+        }
+    })
+</script>
+
+<h1>过渡效果</h1>
+<div id="s9">
+    <h3>按钮过渡</h3>
+    <button @click="show = !show">改变状态</button>
+    <transition>
+        <p v-if="show">Hello</p>
+    </transition>
+    <h3>用animated.css过渡</h3>
+    <transition enter-active-class="animated fadeInLeft"
+                leave-active-class="animated fadeOutUpBig">
+        <p v-if="show">Hello</p>
+    </transition>
+</div>
+<script>
+    let vm9 = new Vue({
+        el: '#s9',
+        data: {
+            show: true
+        }
+    })
+</script>
+</body>
+</html>

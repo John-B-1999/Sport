@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../static/js/vue.js" charset="utf-8"></script>
+    <script type="text/javascript" src="../static/js/axios.js" charset="utf-8"></script>
+</head>
+<body>
+<div id="selector">
+    <aaa>
+        <ttt slot="asd" v-bind:title="title"></ttt>
+        <yyy slot="yy" v-for="(item,index) in items"
+             v-bind:it="item" v-bind:index="index"  v-on:remove="removeItem(index)" :key="index"></yyy>
+    </aaa>
+</div>
+</body>
+<script>
+
+    Vue.component("aaa",{
+        template: '<div>\
+                        <slot name="asd"></slot>\
+                        <ul>\
+                            <slot name="yy"></slot>\
+                        </ul>\
+                   </div>'
+    })
+
+
+    Vue.component("ttt",{
+        props:["title"],
+        template:'<div>{{title}}</div>'
+    })
+
+    Vue.component("yyy",{
+        props:['it','index'],
+        template: '<li>{{it}} <button @click="remove(index)">删除</button></li>',
+        methods:{
+            remove:function (index) {
+                this.$emit('remove',index);
+            }
+        }
+    })
+
+    var vm = new Vue({
+        el:"#selector",
+        data:{
+            title:'标题',
+            items:["java","c","c++"]
+        },
+        methods: {
+            removeItem:function (index) {
+                this.items.splice(index,1);
+            }
+        }
+    });
+</script>
+</html>
