@@ -2,6 +2,7 @@ package com.example.sportApp.service;
 
 import com.example.sportApp.dao.SysUserMapper;
 import com.example.sportApp.model.User;
+import com.example.sportApp.utils.common.AESUtils;
 import com.example.sportApp.utils.copyUtils.FileUtils;
 import com.example.sportApp.utils.page.PageRequest;
 import com.example.sportApp.utils.page.PageResult;
@@ -47,7 +48,13 @@ public class SysUserServiceImpl implements SysUserService {
         int pageSize = pageRequest.getPageSize();
         PageHelper.startPage(pageNum, pageSize);
         List<User> sysMenus = sysUserMapper.selectPage();
+        //保存图片
         FileUtils.generateImage(sysMenus.get(0).getPic(),"C:\\Users\\ywm\\Desktop\\img.jpg");
+        //密码AES解密
+        String password = "key";
+        byte[] decryptFrom = AESUtils.parseHexStr2Byte(sysMenus.get(0).getPassword());
+        byte[] decryptResult = AESUtils.decrypt(decryptFrom,password);
+        System.out.println("解密后：" + new String(decryptResult));
         return new PageInfo<>(sysMenus);
     }
 }
