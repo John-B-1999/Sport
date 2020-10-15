@@ -49,7 +49,7 @@ public class SysUserServiceImpl implements SysUserService {
         PageHelper.startPage(pageNum, pageSize);
         List<User> sysMenus = sysUserMapper.selectPage();
         //保存图片
-        FileUtils.generateImage(sysMenus.get(0).getPic(),"C:\\Users\\ywm\\Desktop\\img.jpg");
+//        FileUtils.generateImage(sysMenus.get(0).getPic(),"C:\\Users\\ywm\\Desktop\\img.jpg");
         //密码AES解密
         String password = "key";
         byte[] decryptFrom = AESUtils.parseHexStr2Byte(sysMenus.get(0).getPassword());
