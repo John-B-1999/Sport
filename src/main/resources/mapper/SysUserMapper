@@ -6,7 +6,8 @@
         select
             id,
             user_name as userName,
-            password
+            password,
+            pic
         from user
     </select>
 
@@ -21,7 +22,10 @@
 
     <select id="selectByPrimaryKey"  resultType="User">
         select
-            *
+            id,
+            user_name as userName,
+            password,
+            pic
         from user
         where id = #{id}
     </select>

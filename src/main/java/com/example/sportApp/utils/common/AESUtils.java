@@ -180,6 +180,38 @@ public class AESUtils {
         return null;
     }
 
+    /**
+     * 加密
+     *
+     * @param content 需要加密的内容
+     * @param password  加密密码
+     * @return
+     */
+    public static byte[] encrypt2(String content, String password) {
+        try {
+            SecretKeySpec key = new SecretKeySpec(password.getBytes(), "AES");
+            Cipher cipher = Cipher.getInstance("AES/ECB/NoPadding");
+            byte[] byteContent = content.getBytes("utf-8");
+            cipher.init(Cipher.ENCRYPT_MODE, key);// 初始化
+            byte[] result = cipher.doFinal(byteContent);
+            return result; // 加密
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (NoSuchPaddingException e) {
+            e.printStackTrace();
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IllegalBlockSizeException e) {
+            e.printStackTrace();
+        } catch (BadPaddingException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
     /**解密
      * 解密的时候要传入byte数组
      * @param content  待解密内容
