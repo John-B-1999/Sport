@@ -55,3 +55,9 @@ pagehelper:
 mybatis:
   mapper-locations: classpath:mapper/*Mapper
   type-aliases-package: com.example.sportApp.model
+
+custom:
+  properties:
+    id: 111
+    key: you
+    value: vvv

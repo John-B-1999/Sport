@@ -4,8 +4,7 @@ import java.util.*;
 
 public class Test {
     public static void main(String[] args) {
-        String s = ")()())";
-        longestValidParentheses(s);
+        System.out.println('a'-'A');
     }
     public static int longestValidParentheses(String s) {
         Deque<Character> deque = new LinkedList<>();
