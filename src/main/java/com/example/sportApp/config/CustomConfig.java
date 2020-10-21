@@ -8,5 +8,4 @@ import org.springframework.context.annotation.Configuration;
 public class CustomConfig {
     @Autowired
     private CustomProperties customProperties;
-
 }

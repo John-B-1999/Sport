@@ -6,6 +6,7 @@ management:
   security:
     enabled: false
 
+
 spring:
   datasource:
     druid:
@@ -61,3 +62,6 @@ custom:
     id: 111
     key: you
     value: vvv
+
+server:
+  port: 8081
